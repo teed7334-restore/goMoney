@@ -29,10 +29,17 @@ cr->ct: 分析回傳的資訊
 ## 資料結構
 ---
 bean -> 傳送資料所需的vo物件
+
 controller -> 對應流程圖的流程管理
+
 images -> 說明文件相關圖片存放處
+
 service -> 對應流程圖的商業邏輯
+
 .env.swp -> 請將檔名改成.env
+
 go.mod -> 本程式有用到的相依套件
+
 main.go -> 程式碼主程式
+
 goMoney.exe goMoney執行主程式
