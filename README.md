@@ -2,7 +2,7 @@
 
 ## 流程圖
 ---
-![[images/20230109092923.png]]
+![流程圖](images/20230109092923.png)
 ```
 @startuml
 !theme mars
