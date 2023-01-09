@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"goMoney/bean"
+	"log"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -41,6 +42,10 @@ func (m *Members) VipLevel() *resty.Response {
 		SetAuthToken(signature).
 		Get(queryString)
 
+	log.Println("Path: ", queryString+"?"+values.Encode())
+	log.Println("params: ", string(req))
+	log.Println("payload: ", payload)
+	log.Println("signature: ", signature)
 	writeLog(err, resp)
 	return resp
 }
