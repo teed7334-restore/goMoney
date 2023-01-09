@@ -2,7 +2,7 @@
 
 ## 流程圖
 ---
-![[Pasted image 20230109092923.png]]
+![[/images/Pasted image 20230109092923.png]]
 ```
 @startuml
 !theme mars
