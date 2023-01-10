@@ -17,11 +17,12 @@ var host = os.Getenv("url")
 var accessKey = os.Getenv("accessKey")
 var secretKey = os.Getenv("secretKey")
 
-func encode(params []byte, secretKey string) (string, string) {
-	payload := base64.URLEncoding.EncodeToString(params)
+func encode(params []byte) (string, string) {
+	payload := base64.StdEncoding.EncodeToString(params)
 	h := hmac.New(sha256.New, []byte(secretKey))
 	h.Write(params)
-	signature := hex.EncodeToString(h.Sum(nil))
+	result := h.Sum(nil)
+	signature := hex.EncodeToString(result)
 	return payload, signature
 }
 

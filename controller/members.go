@@ -2,9 +2,7 @@ package controller
 
 import (
 	"encoding/json"
-	"goMoney/bean"
 	"goMoney/service"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,14 +16,10 @@ func (m Members) New() *Members {
 }
 
 func (m *Members) VipList(c *gin.Context) {
-	res := members.VipLevel()
-	if res.Status() != "200" {
-		var responseError = &bean.ResponseError{}
-		json.Unmarshal(res.Body(), responseError)
-		c.JSON(res.RawResponse.StatusCode, responseError)
+	data := members.VipLevel()
+	var result interface{}
+	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		return
 	}
-	var result = &bean.VipLevelResponse{}
-	json.Unmarshal(res.Body(), result)
-	c.JSON(http.StatusOK, result)
+	c.JSON(data.StatusCode(), result)
 }
