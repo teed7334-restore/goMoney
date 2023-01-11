@@ -26,7 +26,13 @@ func encode(params []byte) (string, string) {
 	return payload, signature
 }
 
-func writeLog(err error, resp *resty.Response) {
+func writeLog(url string, params []byte, payload, signature string, err error, resp *resty.Response) {
+	log.Println("Request Info:")
+	log.Println("  URL        :", url)
+	log.Println("  Params     :\n", string(params))
+	log.Println("  Payload    :", payload)
+	log.Println("  Signature  :", signature)
+	log.Println()
 	log.Println("Response Info:")
 	log.Println("  Error      :", err)
 	log.Println("  Status Code:", resp.StatusCode())

@@ -38,6 +38,6 @@ func (m *Members) VipLevel() *resty.Response {
 		SetQueryParams(map[string]string{"nonce": strconv.FormatInt(nonce, 10)}).
 		Get(queryString)
 
-	writeLog(err, resp)
+	writeLog(queryString, req, payload, signature, err, resp)
 	return resp
 }
