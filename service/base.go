@@ -18,7 +18,7 @@ var accessKey = os.Getenv("accessKey")
 var secretKey = os.Getenv("secretKey")
 
 func encode(params []byte) (string, string) {
-	payload := base64.StdEncoding.EncodeToString(params)
+	payload := base64.URLEncoding.EncodeToString(params)
 	h := hmac.New(sha256.New, []byte(secretKey))
 	h.Write([]byte(payload))
 	result := h.Sum(nil)
