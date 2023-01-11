@@ -20,7 +20,7 @@ var secretKey = os.Getenv("secretKey")
 func encode(params []byte) (string, string) {
 	payload := base64.StdEncoding.EncodeToString(params)
 	h := hmac.New(sha256.New, []byte(secretKey))
-	h.Write(params)
+	h.Write([]byte(payload))
 	result := h.Sum(nil)
 	signature := hex.EncodeToString(result)
 	return payload, signature
