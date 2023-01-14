@@ -9,17 +9,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Trades struct{}
+type Orders struct{}
 
-var trades = service.Trades{}.New()
+var orders = service.Orders{}.New()
 
-func (t Trades) New() *Trades {
-	return &t
+func (o Orders) New() *Orders {
+	return &o
 }
 
-func (t *Trades) My(c *gin.Context) {
+func (o *Orders) Index(c *gin.Context) {
 	params := getQuery(c)
-	data := trades.My(params)
+	data := orders.Index(params)
 	var result interface{}
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")

@@ -9,14 +9,14 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-type Trades struct{}
+type Orders struct{}
 
-func (t Trades) New() *Trades {
-	return &t
+func (o Orders) New() *Orders {
+	return &o
 }
 
-func (t *Trades) My(params map[string]string) *resty.Response {
-	path := "/api/v2/trades/my"
+func (o *Orders) Index(params map[string]string) *resty.Response {
+	path := "/api/v2/orders"
 	queryString := fmt.Sprintf("%s%s", host, path)
 
 	nonce := strconv.FormatInt(time.Now().UnixMilli(), 10)
