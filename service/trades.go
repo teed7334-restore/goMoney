@@ -9,22 +9,19 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-type Members struct{}
+type Trades struct{}
 
-func (m Members) New() *Members {
-	return &m
+func (t Trades) New() *Trades {
+	return &t
 }
 
-func (m *Members) VipLevel() *resty.Response {
-
-	path := "/api/v2/members/vip_level"
+func (t *Trades) My(params map[string]string) *resty.Response {
+	path := "/api/v2/trades/my"
 	queryString := fmt.Sprintf("%s%s", host, path)
 
 	nonce := strconv.FormatInt(time.Now().UnixMilli(), 10)
-	params := map[string]string{
-		"path":  path,
-		"nonce": nonce,
-	}
+	params["path"] = path
+	params["nonce"] = nonce
 
 	req, _ := json.Marshal(params)
 
@@ -41,5 +38,6 @@ func (m *Members) VipLevel() *resty.Response {
 		Get(queryString)
 
 	writeLog(queryString, req, payload, signature, err, resp)
+
 	return resp
 }

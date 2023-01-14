@@ -10,6 +10,7 @@ import (
 )
 
 var members = controller.Members{}.New()
+var trades = controller.Trades{}.New()
 
 func main() {
 	webService()
@@ -24,5 +25,6 @@ func webService() {
 func doRegister() *gin.Engine {
 	route := gin.Default()
 	route.GET("/members/vipList", members.VipList)
+	route.GET("/trades/my", trades.My)
 	return route
 }
