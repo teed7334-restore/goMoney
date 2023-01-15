@@ -32,9 +32,14 @@ func (o *Orders) Index(c *gin.Context) {
 	}
 	for key, value := range res {
 		row := value.(map[string]interface{})
+
 		createAtTs := int64(row["created_at"].(float64))
 		t := time.Unix(createAtTs, 0)
 		row["createdAt"] = t.Format("2006-01-02 15:04:05")
+
+		updateAtTs := int64(row["updated_at"].(float64))
+		t = time.Unix(updateAtTs, 0)
+		row["updatedAt"] = t.Format("2006-01-02 15:04:05")
 		res[key] = row
 	}
 	c.JSON(data.StatusCode(), res)

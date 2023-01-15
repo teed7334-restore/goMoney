@@ -8,5 +8,6 @@ func getQuery(c *gin.Context) map[string]string {
 	for key := range query {
 		params[key] = c.Query(key)
 	}
+	delete(params, "nonce")
 	return params
 }
