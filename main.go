@@ -26,5 +26,7 @@ func doRegister() *gin.Engine {
 	route := gin.Default()
 	route.GET("/members/vipList", members.VipList)
 	route.GET("/orders", orders.Index)
+	route.GET("/orders/create", orders.Create)
+	route.GET("/orders/delete", orders.Delete)
 	return route
 }

@@ -1,6 +1,8 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 func getQuery(c *gin.Context) map[string]string {
 	query := c.Request.URL.Query()
