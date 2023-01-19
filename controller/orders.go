@@ -20,18 +20,13 @@ func (o Orders) New() *Orders {
 func (o *Orders) Index(c *gin.Context) {
 	params := getQuery(c)
 	data := orders.Index(params)
-	var result interface{}
+	result := make([]interface{}, 0)
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")
 		return
 	}
-	res, ok := result.([]interface{})
-	if !ok {
-		log.Println("Response Decode Error!")
-		c.JSON(data.StatusCode(), result)
-		return
-	}
-	for key, value := range res {
+	response := make([]map[string]interface{}, 0)
+	for _, value := range result {
 		row := value.(map[string]interface{})
 
 		createAtTs := int64(row["created_at"].(float64))
@@ -41,74 +36,57 @@ func (o *Orders) Index(c *gin.Context) {
 		updateAtTs := int64(row["updated_at"].(float64))
 		t = time.Unix(updateAtTs, 0)
 		row["updatedAt"] = t.Format("2006-01-02 15:04:05")
-		res[key] = row
+		response = append(response, row)
 	}
-	c.JSON(data.StatusCode(), res)
+	c.JSON(data.StatusCode(), response)
 }
 
 func (o *Orders) Create(c *gin.Context) {
 	params := getQuery(c)
 	data := orders.Create(params)
-	var result interface{}
+	result := make(map[string]interface{})
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")
 		return
 	}
-	res, ok := result.(map[string]interface{})
-	if !ok {
-		log.Println("Response Decode Error!")
-		c.JSON(data.StatusCode(), result)
-		return
-	}
-	createAtTs := int64(res["created_at"].(float64))
+	createAtTs := int64(result["created_at"].(float64))
 	t := time.Unix(createAtTs, 0)
-	res["createdAt"] = t.Format("2006-01-02 15:04:05")
+	result["createdAt"] = t.Format("2006-01-02 15:04:05")
 
-	updateAtTs := int64(res["updated_at"].(float64))
+	updateAtTs := int64(result["updated_at"].(float64))
 	t = time.Unix(updateAtTs, 0)
-	res["updatedAt"] = t.Format("2006-01-02 15:04:05")
-	c.JSON(data.StatusCode(), res)
+	result["updatedAt"] = t.Format("2006-01-02 15:04:05")
+	c.JSON(data.StatusCode(), result)
 }
 
 func (o *Orders) Delete(c *gin.Context) {
 	params := getQuery(c)
 	data := orders.Delete(params)
-	var result interface{}
+	result := make(map[string]interface{})
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")
 		return
 	}
-	res, ok := result.(map[string]interface{})
-	if !ok {
-		log.Println("Response Decode Error!")
-		c.JSON(data.StatusCode(), result)
-		return
-	}
-	createAtTs := int64(res["created_at"].(float64))
+	createAtTs := int64(result["created_at"].(float64))
 	t := time.Unix(createAtTs, 0)
-	res["createdAt"] = t.Format("2006-01-02 15:04:05")
+	result["createdAt"] = t.Format("2006-01-02 15:04:05")
 
-	updateAtTs := int64(res["updated_at"].(float64))
+	updateAtTs := int64(result["updated_at"].(float64))
 	t = time.Unix(updateAtTs, 0)
-	res["updatedAt"] = t.Format("2006-01-02 15:04:05")
-	c.JSON(data.StatusCode(), res)
+	result["updatedAt"] = t.Format("2006-01-02 15:04:05")
+	c.JSON(data.StatusCode(), result)
 }
 
 func (o *Orders) Clear(c *gin.Context) {
 	params := getQuery(c)
 	data := orders.Clear(params)
-	var result interface{}
+	result := make([]interface{}, 0)
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")
 		return
 	}
-	res, ok := result.([]interface{})
-	if !ok {
-		log.Println("Response Decode Error!")
-		c.JSON(data.StatusCode(), result)
-		return
-	}
-	for key, value := range res {
+	response := make([]map[string]interface{}, 0)
+	for _, value := range result {
 		row := value.(map[string]interface{})
 
 		createAtTs := int64(row["created_at"].(float64))
@@ -118,7 +96,7 @@ func (o *Orders) Clear(c *gin.Context) {
 		updateAtTs := int64(row["updated_at"].(float64))
 		t = time.Unix(updateAtTs, 0)
 		row["updatedAt"] = t.Format("2006-01-02 15:04:05")
-		res[key] = row
+		response = append(response, row)
 	}
-	c.JSON(data.StatusCode(), res)
+	c.JSON(data.StatusCode(), response)
 }

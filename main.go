@@ -11,6 +11,7 @@ import (
 
 var members = controller.Members{}.New()
 var orders = controller.Orders{}.New()
+var k = controller.K{}.New()
 
 func main() {
 	webService()
@@ -29,5 +30,6 @@ func doRegister() *gin.Engine {
 	route.GET("/orders/create", orders.Create)
 	route.GET("/orders/delete", orders.Delete)
 	route.GET("/orders/clear", orders.Clear)
+	route.GET("/k", k.Index)
 	return route
 }
