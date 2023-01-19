@@ -45,12 +45,12 @@ func (k *K) Index(params map[string]string) *resty.Response {
 }
 
 func (k *K) SaveToJson(params []map[string]interface{}) bool {
-	err := os.Remove("./out/k-data.json")
+	err := os.Remove("./rule/out/k-data.json")
 	if err != nil {
 		log.Println(err)
 		return false
 	}
-	file, err := os.OpenFile("./out/k-data.json", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+	file, err := os.OpenFile("./rule/out/k-data.json", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
 		log.Println(err)
 		return false

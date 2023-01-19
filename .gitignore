@@ -5,3 +5,6 @@ goMoney.xlsm
 goMoney.docx
 goMoney.pdf
 out/
+rule/Lib/
+rule/Scripts/
+rule/pyvenv.cfg
