@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"goMoney/service"
 	"log"
+	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -23,6 +24,7 @@ func (o *Orders) Index(c *gin.Context) {
 	result := make([]interface{}, 0)
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")
+		c.JSON(http.StatusInternalServerError, gin.H{"ok": false})
 		return
 	}
 	response := make([]map[string]interface{}, 0)
@@ -47,6 +49,7 @@ func (o *Orders) Create(c *gin.Context) {
 	result := make(map[string]interface{})
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")
+		c.JSON(http.StatusInternalServerError, gin.H{"ok": false})
 		return
 	}
 	createAtTs := int64(result["created_at"].(float64))
@@ -65,6 +68,7 @@ func (o *Orders) Delete(c *gin.Context) {
 	result := make(map[string]interface{})
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")
+		c.JSON(http.StatusInternalServerError, gin.H{"ok": false})
 		return
 	}
 	createAtTs := int64(result["created_at"].(float64))
@@ -83,6 +87,7 @@ func (o *Orders) Clear(c *gin.Context) {
 	result := make([]interface{}, 0)
 	if err := json.Unmarshal(data.Body(), &result); err != nil {
 		log.Println("JSON Decode Error!")
+		c.JSON(http.StatusInternalServerError, gin.H{"ok": false})
 		return
 	}
 	response := make([]map[string]interface{}, 0)

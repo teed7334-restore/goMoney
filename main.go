@@ -31,5 +31,6 @@ func doRegister() *gin.Engine {
 	route.GET("/orders/delete", orders.Delete)
 	route.GET("/orders/clear", orders.Clear)
 	route.GET("/k", k.Index)
+	route.GET("/k/saveToJson", k.SaveToJson)
 	return route
 }

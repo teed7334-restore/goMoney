@@ -3,6 +3,8 @@ package service
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+	"os"
 	"strconv"
 	"time"
 
@@ -40,4 +42,22 @@ func (k *K) Index(params map[string]string) *resty.Response {
 	writeLog(queryString, req, payload, signature, err, resp)
 
 	return resp
+}
+
+func (k *K) SaveToJson(params []map[string]interface{}) bool {
+	err := os.Remove("./out/k-data.json")
+	if err != nil {
+		log.Println(err)
+		return false
+	}
+	file, err := os.OpenFile("./out/k-data.json", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+	if err != nil {
+		log.Println(err)
+		return false
+	}
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ")
+	encoder.Encode(params)
+	file.Close()
+	return true
 }
