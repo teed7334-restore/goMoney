@@ -27,3 +27,14 @@ func (m *Members) VipList(c *gin.Context) {
 	}
 	c.JSON(data.StatusCode(), result)
 }
+
+func (m *Members) Accounts(c *gin.Context) {
+	data := members.Accounts()
+	var result interface{}
+	if err := json.Unmarshal(data.Body(), &result); err != nil {
+		log.Println("JSON Decode Error")
+		c.JSON(http.StatusInternalServerError, gin.H{"ok": false})
+		return
+	}
+	c.JSON(data.StatusCode(), result)
+}

@@ -41,3 +41,9 @@ go.mod -> 本程式有用到的相依套件
 main.go -> 程式碼主程式
 
 goMoney.exe goMoney執行主程式
+
+## 編譯
+---
+```
+go build -ldflags "-s -w"
+```
