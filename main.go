@@ -12,6 +12,7 @@ import (
 var members = controller.Members{}.New()
 var orders = controller.Orders{}.New()
 var k = controller.K{}.New()
+var trades = controller.Trades{}.New()
 
 func main() {
 	webService()
@@ -33,5 +34,6 @@ func doRegister() *gin.Engine {
 	route.GET("/orders/clear", orders.Clear)
 	route.GET("/k", k.Index)
 	route.GET("/k/saveToJson", k.SaveToJson)
+	route.GET("/trades/my/of_order", trades.MyOfOrder)
 	return route
 }
