@@ -3,11 +3,14 @@ package main
 import (
 	"fmt"
 	"goMoney/controller"
+	"goMoney/rule"
 	"os"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 )
+
+var rules = rule.Rule{}.New()
 
 var members = controller.Members{}.New()
 var orders = controller.Orders{}.New()
@@ -15,6 +18,11 @@ var k = controller.K{}.New()
 var trades = controller.Trades{}.New()
 
 func main() {
+	status := rules.Execute()
+	if status <= 0 {
+		fmt.Println("Is Expired!!!!")
+		os.Exit(status)
+	}
 	webService()
 }
 
